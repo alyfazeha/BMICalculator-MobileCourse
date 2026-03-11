@@ -8,14 +8,24 @@ void main(List<String> arguments) {
   hitungBMI(170, 65, riwayat);
   hitungBMI(165, 75, riwayat);
   hitungBMI(180, 85, riwayat);
+  hitungBMI(155, -55, riwayat);
 
   // Tampilkan riwayat
   tampilkanRiwayat(riwayat);
 }
 
-void hitungBMI(double tinggiCm, double beratKg, List<Map<String, dynamic>> riwayat) {
+void hitungBMI(
+    double tinggiCm, double beratKg, List<Map<String, dynamic>> riwayat) {
+  // Validasi agar input tidak nol atau negatif
+  if (tinggiCm <= 0 || beratKg <= 0) {
+    print(
+        "Peringatan: Tinggi ($tinggiCm) dan Berat ($beratKg) harus lebih dari 0.\n");
+    return;
+  }
+
   // Konversi tinggi dari cm ke m
   double tinggiM = tinggiCm / 100;
+
   // Hitung BMI
   double bmi = beratKg / (tinggiM * tinggiM);
 
