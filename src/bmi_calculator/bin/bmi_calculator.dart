@@ -1,13 +1,19 @@
 import 'package:bmi_calculator/bmi_calculator.dart' as bmi_calculator;
 
 void main(List<String> arguments) {
+  // Inisialisasi list untuk menyimpan riwayat
+  List<Map<String, dynamic>> riwayat = [];
+
   // Simulasi beberapa input
-  hitungBMI(170, 65);
-  hitungBMI(165, 75);
-  hitungBMI(180, 85);
+  hitungBMI(170, 65, riwayat);
+  hitungBMI(165, 75, riwayat);
+  hitungBMI(180, 85, riwayat);
+
+  // Tampilkan riwayat
+  tampilkanRiwayat(riwayat);
 }
 
-void hitungBMI(double tinggiCm, double beratKg) {
+void hitungBMI(double tinggiCm, double beratKg, List<Map<String, dynamic>> riwayat) {
   // Konversi tinggi dari cm ke m
   double tinggiM = tinggiCm / 100;
   // Hitung BMI
@@ -23,5 +29,21 @@ void hitungBMI(double tinggiCm, double beratKg) {
     kategori = "Gemuk";
   } else {
     kategori = "Obesitas";
+  }
+
+  // Simpan hasil ke riwayat
+  riwayat.add({
+    'tinggi': tinggiCm,
+    'berat': beratKg,
+    'bmi': bmi.toStringAsFixed(1), // Membatasi angka di belakang koma
+    'kategori': kategori
+  });
+}
+
+void tampilkanRiwayat(List<Map<String, dynamic>> riwayat) {
+  print("=== Riwayat Perhitungan BMI ===");
+  for (var item in riwayat) {
+    print(
+        "Tinggi: ${item['tinggi']}cm | Berat: ${item['berat']}kg | BMI: ${item['bmi']} (${item['kategori']})");
   }
 }
